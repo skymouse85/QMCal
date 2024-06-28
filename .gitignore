@@ -33,3 +33,5 @@ coverage/
 
 __pycache__/
 *.py[cod]
+
+qmshowcal.json

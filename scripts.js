@@ -15,28 +15,35 @@ document.addEventListener('DOMContentLoaded', async () => {
             throw new Error(events.error);
         }
 
-        eventsContainer.innerHTML = events
-            .sort((a, b) => new Date(a.start.dateTime) - new Date(b.start.dateTime))
-            .map(event => {
-                const startDate = new Date(event.start.dateTime);
-                const endDate = new Date(event.end.dateTime);
+        const sortedEvents = [...events].sort((a, b) => 
+            new Date(a.start?.dateTime || 0) - new Date(b.start?.dateTime || 0)
+        );
 
-                const startDateStr = startDate.toLocaleDateString('en-US');
-                const startTimeStr = startDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        sortedEvents.forEach(event => {
+            if (!event.start || !event.start.dateTime || !event.end || !event.end.dateTime) {
+                return;
+            }
 
-                const endDateStr = endDate.toLocaleDateString('en-US');
-                const endTimeStr = endDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            const startDate = new Date(event.start.dateTime);
+            const endDate = new Date(event.end.dateTime);
 
-                return `
-                    <div class="event">
-                        <h2>${event.summary}</h2>
-                        <p>${startDateStr} ${startTimeStr} - ${endDateStr} ${endTimeStr}</p>
-                        <p>${event.location}</p>
-                        <p>${event.description}</p>
-                    </div>
-                `;
-            })
-            .join('');
+            const startDateStr = startDate.toLocaleDateString('en-US');
+            const startTimeStr = startDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+            const endDateStr = endDate.toLocaleDateString('en-US');
+            const endTimeStr = endDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+            const eventElement = document.createElement('div');
+            eventElement.classList.add('event-container');
+            eventElement.innerHTML = `
+                <h2 class="title">${event.summary}</h2>
+                <p>${startDateStr} ${startTimeStr} - ${endTimeStr}</p>
+                <p>${event.location}</p>
+                <p>${event.description}</p>
+            `;
+
+            eventsContainer.appendChild(eventElement);
+        });
     } catch (error) {
         console.error('Error:', error);
         eventsContainer.innerHTML = `<p>Error loading events: ${error.message}</p>`;

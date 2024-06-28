@@ -1,40 +1,151 @@
+:root {
+	/* Main background image */
+	--bg-img: url(./backgrounds/bg-1.jpg);
+
+	/* Max widths: small = text, large = media, headings */
+	--max-w-small: 700px;
+	--max-w-large: 1000px;
+
+	/* Main Text color Variables */
+	--main-text-fill: white;
+	--main-text-stroke: aqua;
+	--main-text-shadow-1: DarkMagenta;
+	--main-text-shadow-2: aqua;
+	--main-text-accent-1: fuchsia;
+
+	/* Global: Box and Background */
+	--g-border: 3px double var(--main-text-stroke);
+	--g-border-radius: 20px 40%;
+	--g-box-shadow:
+		0px 0px 20px var(--main-text-accent-1), 
+		0px 0px 3px var(--main-text-stroke);
+	--g-background:
+		linear-gradient( 24deg, 
+		rgba(127,122,203,1.0) 0%, 
+		rgba(162,136,170,0.7) 30%, 
+		rgba(90,208,172,0.7) 62%, 
+		rgba(106,208,255,0.9) 100% );
+
+	/* Global: Fonts and Font styling */
+	--g-font-family: 'Share Tech Mono', monospace;
+	--g-color: var(--main-text-fill);
+	--g-text-shadow:
+		2px 2px 2px var(--main-text-shadow-1), 
+		-1px -1px 2px var(--main-text-shadow-2);
+
+	/* Heading text-shadows */
+	--h-text-shadow:
+		-2px -2px 2px var(--main-text-shadow-1),
+		2px 2px 4px var(--main-text-shadow-2);
+
+	/* Links text-shadows */
+	--a-text-shadow:
+		-2px -2px 2px var(--main-text-shadow-1),
+		2px 2px 4px var(--main-text-shadow-2);
+
+	--a-hover-text-shadow:
+		0px 0px 6px var(--main-text-fill),
+		0px 0px 3px var(--main-text-fill);
+}
+
+/* GLOBAL CSS CLASSES */
+.global-box {
+	background: var(--g-background);
+	border: var(--g-border);
+	border-radius: var(--g-border-radius);
+	box-shadow: var(--g-box-shadow);
+}
+
+.global-text {
+	font-family: var(--g-font-family);
+	color: var(--g-color);
+	text-shadow: var(--g-text-shadow);
+}
+
+/* FONT IMPORTS */
+@font-face {
+	font-family: "gau pop magic";
+	src: url('fonts/gau_pop_magic.TTF');
+}
+
+@font-face {
+	font-family: "kosmos";
+	src: url('fonts/kosmos.TTF');
+}
+
+@font-face {
+	font-family: "neuropol";
+	src: url('fonts/neuropol.otf');
+}
+
+/* CSS STYLES */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
+	font-family: var(--g-font-family);
+	color: var(--g-color);
+	text-shadow: var(--g-text-shadow);
+	font-size: x-large;
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
 }
 
-header {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1rem;
+#bg-div {
+	background-image: var(--bg-img);
+	background-attachment: fixed;
+	background-position: center 20%;
+	background-size: 100% auto;
+	padding-bottom: 3rem;
 }
 
-main {
-    padding: 2rem;
+#top-column {
+	padding: 1rem;
 }
 
-#events-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+#top-column p {
+	margin: 1.5rem auto 6rem;
+	padding: 1rem;
 }
 
-.event {
-    background-color: white;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.sm_header {
+	background-color: var(--main-text-stroke);
+	color: var(--main-text-fill);
+	text-align: center;
+	padding: 1rem;
+}
+
+.h1 {
+	text-align: center;
+	margin: 1rem 0;
+	text-shadow: var(--h-text-shadow);
+}
+
+.events-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1rem;
+}
+
+.event-container {
+	background-color: white;
+	padding: 1rem;
+	border-radius: var(--g-border-radius);
+	box-shadow: var(--g-box-shadow);
+	border: var(--g-border);
+}
+
+.title {
+	font-size: 1.5rem;
+	margin: 0;
+	text-shadow: var(--h-text-shadow);
 }
 
 footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+	background-color: var(--main-text-stroke);
+	color: var(--main-text-fill);
+	text-align: center;
+	padding: 1rem;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
 }
